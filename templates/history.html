@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat History</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        /* History List Styles */
+        .history-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .history-list li {
+            background: #fff;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            padding: 18px 20px;
+            box-shadow: 0 1px 3px rgba(44, 62, 80, 0.04);
+        }
+
+        .history-list strong {
+            color: #2980b9;
+            font-weight: 600;
+        }
+
+        .history-list li br {
+            margin-bottom: 10px;
+            display: block;
+            content: "";
+        }
+
+        /* Link Styles */
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chat History</h1>
+        <ul class="history-list">
+            {% for chat in history %}
+                <li>
+                    <strong>Question:</strong> {{ chat.question }}<br>
+                    <strong>Summary:</strong> {{ chat.summary }}
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="/" class="back-link">Back to Summarizer</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="history"><a href="{{ url_for('history') }}">View Chat History</a></div>
+        <h1>Text Summarization Tool</h1>
+        <p class="subtitle">Powered by BART-large-cnn</p>
+        
+        <form method="POST" action="/">
+            <div class="input-section">
+                <textarea name="text" placeholder="Paste your article here (min. 50 characters)...">{{ last_input }}</textarea>
+                <div class="controls">
+                    <label for="max-length">Summary Length:</label>
+                    <input type="range" name="max_length" min="50" max="200" value="130" 
+                           oninput="document.getElementById('length-value').textContent = this.value + ' chars'">
+                    <span id="length-value">130 chars</span>
+                    <button type="submit">Summarize</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="output-section">
+            <h2>Summary</h2>
+            <div class="summary-box">
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% elif summary %}
+                    {{ summary }}
+                    <div class="stats">
+                        Reduced from <strong>{{ stats.original }}</strong> to 
+                        <strong>{{ stats.summary }}</strong> characters 
+                        ({{ stats.reduction }}% shorter)
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
